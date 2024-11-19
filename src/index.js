@@ -47,4 +47,4 @@ app.on("Error", (err) =>
     console.error("Hubo un problema con el servidor", err)
 );
 
-console.log('Swagger Docs available at http://localhost:8080/api-docs');
+console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
