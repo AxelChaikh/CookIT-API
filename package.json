@@ -4,7 +4,7 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node .",
+    "start": "node --env-file=.env .",
     "watch": "node --env-file=.env --watch .",
     "test": "mocha src/test/users.test.js"
   },
