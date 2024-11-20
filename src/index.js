@@ -29,7 +29,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: "cookit-api.up.railway.app",
+                url: "",
             },
         ],
     },
