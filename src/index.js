@@ -5,6 +5,7 @@ import config from "./config.js";
 import MongoConnection from "./models/MongoConnection.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc'
+require('dotenv').config();
 
 
 const app = express();
@@ -34,11 +35,9 @@ const swaggerOptions = {
 }
 
 const spacs = swaggerjsdoc(swaggerOptions)
-
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spacs));
 
 await MongoConnection.connect()
-
 app.listen(PORT, () =>
     console.log(`Servidor corriendo en: http://localhost:${PORT}`)
 );
