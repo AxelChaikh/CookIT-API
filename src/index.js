@@ -29,7 +29,7 @@ const swaggerOptions = {
         },
         servers: [
             {
-                url: "http://localhost:8080",
+                url: "cookit-api.up.railway.app",
             },
         ],
     },
@@ -41,11 +41,11 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(spacs));
 
 await MongoConnection.connect()
 app.listen(PORT, () =>
-    console.log(`Servidor corriendo en: http://localhost:${PORT}`)
+    console.log(`Servidor corriendo en: https://cookit-api.up.railway.app`)
 );
 
 app.on("Error", (err) =>
     console.error("Hubo un problema con el servidor", err)
 );
 
-console.log(`Swagger Docs available at http://localhost:${PORT}/api-docs`);
+console.log(`Swagger Docs available at https://cookit-api.up.railway.app/api-docs/`);
