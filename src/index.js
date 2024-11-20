@@ -5,7 +5,9 @@ import config from "./config.js";
 import MongoConnection from "./models/MongoConnection.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc'
-require('dotenv').config();
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 
 const app = express();
