@@ -5,8 +5,11 @@ import config from "./config.js";
 import MongoConnection from "./models/MongoConnection.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerjsdoc from 'swagger-jsdoc'
+import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
+
+
 
 
 
@@ -15,6 +18,12 @@ const PORT = config.PORT;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Configuración de CORS
+app.use(cors({
+    origin: 'http://localhost:5173', // Permitir solicitudes desde este origen
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Métodos HTTP permitidos
+    allowedHeaders: ['Content-Type', 'Authorization'] // Encabezados permitidos
+}));
 
 app.use("/recipes", new RecipesRouter().start());
 app.use("/users", new UsersRouter().start())
