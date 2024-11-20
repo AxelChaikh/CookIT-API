@@ -17,7 +17,7 @@ class RecipesRouter {
         this.router.post("/newRecipe", roleAuth, this.controller.uploadNewRecipe)
         this.router.patch("/update/:id", this.controller.updateRecipe)
         this.router.patch("/update/tags/:id", this.controller.updateTags)
-        this.router.delete("/delete/:id", this.controller.deleteRecipeById)
+        this.router.delete("/delete/:id", roleAuth, this.controller.deleteRecipeById)
         return this.router;
     }
 }

@@ -10,13 +10,13 @@ class UsersRouter {
 
     start() {
         this.router.get("/id/:id", this.controller.getUserById)
-        this.router.get("/users", roleAuth, this.controller.getAllusers)
+        this.router.get("/users", this.controller.getAllusers)
         this.router.get("/username/:name", this.controller.getUserByUsername)
         this.router.get("/rol/:rol", this.controller.getUsersByRol)
         this.router.post("/newUser", this.controller.uploadNewUser)
         this.router.patch("/update/restrictions/:id", this.controller.updateRestrictions)
         this.router.patch("/update/:id", this.controller.updateUser)
-        this.router.delete("/delete/:id", this.controller.deleteUserById)
+        this.router.delete("/delete/:id", roleAuth, this.controller.deleteUserById)
 
         return this.router;
     }
