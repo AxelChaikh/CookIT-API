@@ -31,8 +31,20 @@ class RecipesModelMongo {
   }
 
   getRecipesByIngredient = async (ingredient) => {
-    const recipesByIngredient = await MongoConnection.db.collection("recipes").find({ ingredients: ingredient }).toArray()
-    return recipesByIngredient
+    const allRecipes = await MongoConnection.db.collection("recipes").find({}).toArray()
+    let RecipesByIngredient = []
+    allRecipes.forEach(recipe => {
+      recipe.ingredients.forEach(ing =>{
+        if(ing.toLowerCase().includes(ingredient.toLowerCase())){
+          RecipesByIngredient.push(recipe)
+        }
+      })
+    })
+    if (RecipesByIngredient.length === 0) {
+      return `No existen recetas con este ingrediente: ${ingredient}! `
+    } else {
+      return RecipesByIngredient
+    }
   }
 
   getRecipesByDifficulty = async (difficulty) => {
