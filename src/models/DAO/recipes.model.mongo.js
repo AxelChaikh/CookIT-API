@@ -40,11 +40,9 @@ class RecipesModelMongo {
         }
       })
     })
-    if (RecipesByIngredient.length === 0) {
-      return `No existen recetas con este ingrediente: ${ingredient}! `
-    } else {
+
       return RecipesByIngredient
-    }
+
   }
 
   getRecipesByDifficulty = async (difficulty) => {
