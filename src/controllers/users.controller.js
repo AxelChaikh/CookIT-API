@@ -83,6 +83,32 @@ class UsersController {
         
     }
 
+    addRecetaFavorita = async (req, res) => {
+        // postman: {"idRecetaOriginal": "6733b5239bee9ca353f3cd4c", "original": true}
+        const { id } = req.params;
+        const idRecetaFavorita = req.body;
+        if (id == null) {
+            res.status(400).send("ID inválido")
+        } else {
+            const newUser = await this.service.addRecetaFavorita(id, idRecetaFavorita);
+            res.send(newUser);
+        }
+
+    }
+    removeRecetaFavorita = async (req, res) => {
+        // postman: {"idRecetaFavorita": "67437bd765a50da37609b9b9"}
+        const { id } = req.params;
+        const idRecetaFavorita = req.body.idRecetaFavorita;
+
+        if (id == null) {
+            res.status(400).send("ID inválido")
+        } else {
+            const newUser = await this.service.removeRecetaFavorita(id, idRecetaFavorita);
+            res.send(newUser);
+        }
+
+    }
+
 }
 
 export default UsersController;

@@ -36,6 +36,14 @@ class UsersService {
     updateUser = async (id, data) => {
         return await this.model.updateUser(id, data);
     }
+
+
+    addRecetaFavorita = async (id, recetaFav) => {
+        return await this.model.addRecetaFavorita(id, recetaFav);
+    }
+    removeRecetaFavorita = async (id, idRecetaFavorita) => {
+        return await this.model.removeRecetaFavorita(id, idRecetaFavorita);
+    }
 }
 
 export default UsersService;

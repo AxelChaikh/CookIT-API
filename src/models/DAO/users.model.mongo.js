@@ -69,6 +69,59 @@ class UsersModelMongo {
         return user;
     };
 
+    addRecetaFavorita = async (id, recetaFav) => {
+        let res;
+        let user;
+        const recetaConId = {  _id: new ObjectId(), ...recetaFav }
+        user = await MongoConnection.db
+            .collection("users")
+            .findOne({ _id: ObjectId.createFromHexString(id) });
+
+        if (user !== null) {
+            res = await MongoConnection.db
+                .collection("users")
+                .updateOne(
+                    { _id: ObjectId.createFromHexString(id) },
+                    { $addToSet: { recetasFavoritas: recetaConId } }
+                );
+            user = await MongoConnection.db
+                .collection("users")
+                .findOne({ _id: ObjectId.createFromHexString(id) });
+        } else {
+            return "usuario inexistente";
+        }
+        return { res, user };
+    };
+
+    removeRecetaFavorita = async (id, idRecetaFavorita) => {
+        let res;
+        let user;
+        // Verifica si el usuario existe
+        user = await MongoConnection.db
+            .collection("users")
+            .findOne({ _id: ObjectId.createFromHexString(id) });
+
+        if (user !== null) {
+            // Utiliza el operador $pull para eliminar el objeto con el _id correspondiente
+            res = await MongoConnection.db
+                .collection("users")
+                .updateOne(
+                    { _id: ObjectId.createFromHexString(id) },
+                    { $set: data },
+            { $pull: { recetasFavoritas: { _id: ObjectId.createFromHexString(idRecetaFavorita) } } }
+        );
+            if(res.matchedCount == 1 && res.modifiedCount == 0){
+                return "No existe ninguna receta favorita con ese id."
+            }
+            // Obtener el usuario actualizado sin tener que hacer otra consulta
+            user = await MongoConnection.db
+                .collection("users")
+                .findOne({ _id: ObjectId.createFromHexString(id) });
+        } else {
+            return "usuario inexistente";
+        }
+        return { res, user };
+    };
 }
 
 
