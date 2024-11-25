@@ -19,6 +19,7 @@ class UsersRouter {
         this.router.delete("/delete/:id", roleAuth, this.controller.deleteUserById)
         this.router.patch("/update/addRecetaFavorita/:id", this.controller.addRecetaFavorita)
         this.router.patch("/update/removeRecetaFavorita/:id", this.controller.removeRecetaFavorita)
+
         return this.router;
     }
 }

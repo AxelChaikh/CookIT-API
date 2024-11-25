@@ -17,7 +17,15 @@ const app = express();
 const PORT = config.PORT;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(express.json({
+    verify: (req, res, buf) => {
+        try {
+            JSON.parse(buf);
+        } catch (err) {
+            throw new Error('Invalid JSON');
+        }
+    }
+}));
 // Configuración de CORS
 app.use(cors({
     origin: '*', // Permitir solicitudes desde este origen
