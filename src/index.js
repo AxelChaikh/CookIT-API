@@ -27,10 +27,18 @@ app.use(express.json({
     }
 }));
 // Configuración de CORS
+const allowedOrigins = '*';
+
 app.use(cors({
-    origin: '*', // Permitir solicitudes desde este origen
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Métodos HTTP permitidos
-    allowedHeaders: ['Content-Type', 'role'], // Encabezados permitidos
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'], // Include PATCH
+    allowedHeaders: ['Content-Type', 'Authorization'], // Add any other headers you expect
     credentials: true
 }));
 
