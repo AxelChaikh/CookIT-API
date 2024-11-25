@@ -63,12 +63,12 @@ class UsersController {
         // {"restricciones":["vegan"]}
         const { id } = req.params;
         const data = req.body;
-        if (id == null) {
-            res.status(400).send("ID inválido")
-        } else {
+        //if (id == null) {
+        //    res.status(400).send("ID inválido")
+        //} else {
             const user = await this.service.updateRestrictions(id, data)
             res.status(200).send(user)
-        }
+        //}
     }
 
     updateUser = async (req, res) => {
