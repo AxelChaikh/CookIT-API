@@ -26,13 +26,27 @@ app.use(express.json({
         }
     }
 }));
-// Configuración de CORS
-app.use(cors({
-    origin: '*', // Permitir solicitudes desde este origen
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTION'], // Métodos HTTP permitidos
-    allowedHeaders: ['Content-Type', 'role'], // Encabezados permitidos
-    credentials: true
-}));
+// Enable preflight for all routes
+app.options('*', cors());
+
+// Define CORS settings for specific routes
+const corsOptions = {
+    origin: '*', // Allowed origins
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTION'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization', 'role'], // Allowed headers
+    credentials: true // Allow cookies or auth headers
+};
+
+// Apply CORS middleware to routes
+app.use(cors(corsOptions));
+
+// Example route
+app.patch('/users/update/restrictions/:id', (req, res) => {
+    const { id } = req.params;
+    const { restricciones } = req.body;
+    // Handle your logic here
+    res.json({ success: true, id, restricciones });
+});
 
 app.use("/recipes", new RecipesRouter().start());
 app.use("/users", new UsersRouter().start())
