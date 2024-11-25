@@ -34,7 +34,6 @@ const corsOptions = {
     origin: '*', // Allowed origins
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTION'], // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization', 'role'], // Allowed headers
-    credentials: true // Allow cookies or auth headers
 };
 
 // Apply CORS middleware to routes
