@@ -30,7 +30,8 @@ app.use(express.json({
 app.use(cors({
     origin: '*', // Permitir solicitudes desde este origen
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'], // Métodos HTTP permitidos
-    allowedHeaders: ['Content-Type', 'Authorization', 'role'] // Encabezados permitidos
+    allowedHeaders: ['Content-Type', 'Authorization', 'role'], // Encabezados permitidos
+    credentials: true
 }));
 
 app.use("/recipes", new RecipesRouter().start());
