@@ -14,7 +14,7 @@ class UsersRouter {
         this.router.get("/username/:name", this.controller.getUserByUsername)
         this.router.get("/rol/:rol", this.controller.getUsersByRol)
         this.router.post("/newUser", this.controller.uploadNewUser)
-        this.router.patch("/update/restrictions/:id", this.controller.updateRestrictions)
+        this.router.put("/update/restrictions/:id", this.controller.updateRestrictions)
         this.router.patch("/update/:id", this.controller.updateUser)
         this.router.delete("/delete/:id", roleAuth, this.controller.deleteUserById)
         this.router.patch("/update/addRecetaFavorita/:id", this.controller.addRecetaFavorita)
